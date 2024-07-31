@@ -22,13 +22,19 @@ export default function Login(){
         'email':email.email,
         'password':password.password
      }
-     axios.post('/auth/login/',params).then((res)=>{
-         console.log(res)
+     axios.post('/auth/login/',params).then((res0)=>{
+         console.log(res0)
+         if("password incorrect" == res0.data){
+          window.alert('password incorrect')
+        } else{
           axios.get('/auth/get_cookie').then((res)=>{
             console.log(res.data.token)
             localStorage.setItem('token',res.data.token)
-            console.log(localStorage)
-          })
+            //console.log(localStorage)
+            //console.log(res.data)
+            navigate("/welcome")
+          
+          })}
      })      
 
     }

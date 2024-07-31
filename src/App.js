@@ -10,6 +10,9 @@ import ConfirmAccount from './Auth/confirm_account';
 import Forgot_password from './Auth/forgot_password';
 import ResetPassword from './Auth/reset_password';
 import CreditCard from './components/CreditCards';
+import MetaMaskAccounts from './components/list_metamask_accounts';
+import Welcome from './components/welcomePage';
+import PlaceOrder from './components/order_product';
 function App() {
   return (
     <div className="App">
@@ -24,6 +27,9 @@ function App() {
     <Route exact path='/forgot_password' element={<Forgot_password/>}/>
     <Route exact path='/reset_password' element={<ResetPassword/>}/>
     <Route exact path="/card" element={<CreditCard/>}/>
+    <Route exact path="/testmetamask" element={<MetaMaskAccounts/>} />
+    <Route exact path="/welcome" element={<Welcome/>} />
+    <Route exact path="/order/:id" element={< PlaceOrder/>} />
     </Routes>
     </BrowserRouter>
     </div>

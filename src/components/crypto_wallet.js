@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export default function Crypto(props)
 {
     console.log(window.ethereum)
+    console.log(props)
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
         window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -76,8 +77,12 @@ export default function Crypto(props)
           //axios.put('/payment/fund/'+user+'/'+wallet_balance).then((res)=>{console.log(res)})
       }
     return (<div>
-         <button   onClick={onBuy}><img src="https://www.logo.wine/a/logo/Ethereum/Ethereum-Icon-Purple-Dark-Dark-Background-Logo.wine.svg" width="200px" height="40px"></img></button>
-        
+         
+         <button  className="btn btn-medium btn-normal text-uppercase"    onClick={onBuy}><img
+          src="https://cdn.worldvectorlogo.com/logos/metamask.svg" // Use the URL of the MetaMask logo
+          alt="MetaMask"
+          style={{ width: '24px', height: '24px', marginRight: '10px' }}
+        /></button>
          
     </div>)
 }

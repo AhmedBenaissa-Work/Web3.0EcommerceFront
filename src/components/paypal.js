@@ -1,9 +1,11 @@
+import { faCcPaypal } from "@fortawesome/free-brands-svg-icons";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function Paypal(props){
 
 const CreatePaypalPayment = event =>{
-    event.preventDefault()
+  
     const response =  axios.post(
     'https://api-m.sandbox.paypal.com/v1/oauth2/token',
     new URLSearchParams({
@@ -70,7 +72,7 @@ window.open(url,"payment",params)
 }
 return (<div>
     <PayPalScriptProvider options={{ "client-id": "AWla8-NynFHzR2idw-3ZrJXi2Fq_EvEJe9W7YiwWlO2B1SARjr2evfpOIc2Oa94G5qm9wlOtFE9RiJCF" }}>
-                   <button className="button4"  onClick={CreatePaypalPayment}>Pay with paypal</button>
+                   <button className="btn btn-medium btn-normal text-uppercase" onClick={CreatePaypalPayment}><FontAwesomeIcon icon={faCcPaypal} size="4x" style={{ marginRight: '10px' }} /></button>
                    </PayPalScriptProvider>
 </div>)
 }

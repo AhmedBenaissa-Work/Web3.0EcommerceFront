@@ -55,7 +55,8 @@ export default function Login(){
               <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
             </div>
           </div></div></div></section>
-    <section id="billboard" className="center overflow-hidden bg-light-blue col-md-5">
+          <div className="container">
+    <section id="billboard" className="left overflow-hidden bg-light-blue col-md-10">
   <form className="center">
   <h2 className="display-7 text-dark text-uppercase">Login</h2>
   <label for="email">Email:</label>
@@ -72,6 +73,6 @@ export default function Login(){
   
   
   </form> 
-    </section></div>)
+    </section></div></div>)
 
 }

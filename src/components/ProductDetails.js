@@ -9,8 +9,8 @@ import Paypal from "./paypal";
 import PaymentMethodsModal from "./ModalPayment";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCcVisa, faCcMastercard, faCcAmex, faCcDiscover, faCcPaypal } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
-export default function PlaceOrder(props){
+;
+export default function ProductDetails(){
     const [User,setUser]=useState()
     const [Products,setProducts]=useState([])
     let {id}=useParams()
@@ -26,27 +26,7 @@ export default function PlaceOrder(props){
         setaddress({address:event.target.value})
       }
     
-    const onOrder = event => {
-
-        event.preventDefault()
-        const token = localStorage.token;
-        const user = jwtDecode(token)
-        console.log(user)
-       
-        const headers = {
-          "authorization":token
-        }
-        const BodyParams={
-            'product_id':id,
-            'shipment_address':address.address
-        }
-        axios.post('/orders/place_order',BodyParams,{headers:headers}).then((res)=>{
-            console.log(res)
-            axios.post('/products/decrease/'+id,{},{headers:headers}).then((res)=>{
-              console.log(res)
-            })
-        })
-    }
+    
 
     useEffect(()=>{
 
@@ -67,14 +47,8 @@ export default function PlaceOrder(props){
         axios.post('/products/'+id,{},{headers:headers}).then((res1)=>{
             console.log(res1)
             setProducts(res1.data)
-            const dataToPass = {
-              price: res1.data[0].price,
-              
-              ...props.additionalProps // If you have additional props to pass
-            };
         })
     },[])
-   
 return (
       <div>
       <Header></Header>
@@ -107,7 +81,6 @@ return (
                   </div>
           <div className="cart-concern position-absolute">
             <div className="cart-button d-flex">
-              <input type='submit' onClick={onOrder} className="btn btn-medium btn-black" value="order"/>
               
                 <svg className="cart-outline">
                   
@@ -120,23 +93,18 @@ return (
               <a href="#">{product.name}</a>
             </h3>
             <span className="text-primary">{product.price}$</span>
+            
+          </div>
+          <div className="card-detail">
+            <h3 className="card-title text-uppercase">
            
+            </h3>
+            <span className="text-primary">{product.info}</span>
+            
           </div>
         </div>
-        <form className="center">
-          <h2 className="display-7 text-dark text-uppercase">Choose Shipment Address</h2>
-          <label for="email">Address</label>
-          <input className="form-control btn-rounded-none" type="address" name="Address" placeholder="Your  address here" onChange={handleChange} /><br></br></form>
-        <div className="box">
-      <h1>Choose Payment Method</h1>
-              <p>Choose metamask Account</p>
-              <MetaMaskAccounts value={Products[0].price}></MetaMaskAccounts>
-                    <p>Choose Paypal</p>
-                    <Paypal value={Products[0].price}></Paypal>
-                    <p>Choose Credit Card</p>
-                    <Link to={`/card/${Products[0].price}`}><FontAwesomeIcon icon={faCcVisa} size="4x" style={{ marginRight: '10px' }} /></Link>
-                    <p>Pay with metamask wallet</p>
-                    <Crypto value={Products[0].price}></Crypto> </div>
+        
+      
                     
        
       

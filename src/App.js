@@ -13,6 +13,9 @@ import CreditCard from './components/CreditCards';
 import MetaMaskAccounts from './components/list_metamask_accounts';
 import Welcome from './components/welcomePage';
 import PlaceOrder from './components/order_product';
+import View_Orders from './components/view_orders';
+import ProductDetails from './components/ProductDetails';
+import PayWithCreditCard from './components/PayWithCreditCard';
 function App() {
   return (
     <div className="App">
@@ -30,6 +33,12 @@ function App() {
     <Route exact path="/testmetamask" element={<MetaMaskAccounts/>} />
     <Route exact path="/welcome" element={<Welcome/>} />
     <Route exact path="/order/:id" element={< PlaceOrder/>} />
+    <Route exact path="/orders" element={< View_Orders/>} />
+    <Route exact path="/product/:id" element={< ProductDetails/>} />
+    
+    <Route exact path="/card/:amount"
+          element={<PayWithCreditCard/>}
+        />
     </Routes>
     </BrowserRouter>
     </div>

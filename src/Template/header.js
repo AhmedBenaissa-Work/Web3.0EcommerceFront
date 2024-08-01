@@ -1,3 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShopify } from "@fortawesome/free-brands-svg-icons";
+import { faCcMastercard } from "@fortawesome/free-brands-svg-icons";
+import { faOpencart } from "@fortawesome/free-brands-svg-icons";
+import { faBtc } from "@fortawesome/free-brands-svg-icons";
+
 export default function Header()
 {
     return (<div>
@@ -25,22 +31,23 @@ export default function Header()
                   <a className="nav-link me-4 active" href="#billboard">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link me-4" href="#company-services">Payment</a>
+                  <a className="nav-link me-4" href="/card">Register Credit Card <FontAwesomeIcon icon={faCcMastercard} /></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link me-4" href="#mobile-products">View Products</a>
+                
+                  <a className="nav-link me-4" href="/welcome">View Products  <FontAwesomeIcon icon={faShopify} /></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link me-4" href="#smart-watches">Orders</a>
+                  <a className="nav-link me-4" href="/orders">Orders <FontAwesomeIcon icon = {faOpencart} /></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link me-4" href="#yearly-sale">Profile</a>
+                  <a className="nav-link me-4" href="#yearly-sale">Profile <i class="fa fa-user"></i></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link me-4" href="#latest-blog">Crypto Tracker</a>
+                  <a className="nav-link me-4" href="#latest-blog">Crypto Tracker <FontAwesomeIcon icon={faBtc}/></a>
                 </li>
                 <li className="nav-item dropdown">
-                  <a className="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Login</a>
+                  <a className="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="/login" role="button" aria-expanded="false">Login</a>
                   
                   
                 </li>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
 import Header from "../Template/header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 export default function Login(){
 
     const navigate = useNavigate();
@@ -38,6 +40,16 @@ export default function Login(){
      })      
 
     }
+    const handleGoogleAuth =event =>{
+
+      event.preventDefault()
+      try{
+      window.open('http://localhost:8000/auth/google', '_blank')
+
+      }catch(error){
+        window.alert('error google logi')
+      }
+    }
     const handleForgotPassword = event =>{
       event.preventDefault()
       navigate("/forgot_password")
@@ -65,8 +77,9 @@ export default function Login(){
   <input className="form-control btn-rounded-none" type="password" name="Password" placeholder="Your password here" onChange={handleChange2}/><br></br>
   <input type="submit"  className="btn btn-medium btn-normal text-uppercase" value="sign-in" onClick={handleSubmit}/> <br></br>
   <label for="lname">Forget Password click here</label><br></br>
-  <input type="submit"  className="btn btn-medium btn-normal text-uppercase" value="forgot password" onClick={handleForgotPassword}/> 
-  
+  <input type="submit"  className="btn btn-medium btn-normal text-uppercase" value="forgot password" onClick={handleForgotPassword}/> <br></br>
+  <FontAwesomeIcon icon = {faGoogle} size="4x" style={{ marginRight: '10px' , color:'red' ,position:"relative" }}></FontAwesomeIcon>
+  <input type="submit"  className="btn btn-medium btn-normal text-uppercase" value="Sign in with Google" onClick={handleGoogleAuth}/> 
   
   
   

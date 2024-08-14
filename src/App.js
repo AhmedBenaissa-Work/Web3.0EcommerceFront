@@ -16,7 +16,11 @@ import PlaceOrder from './components/order_product';
 import View_Orders from './components/view_orders';
 import ProductDetails from './components/ProductDetails';
 import PayWithCreditCard from './components/PayWithCreditCard';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 function App() {
+ 
   return (
     <div className="App">
     

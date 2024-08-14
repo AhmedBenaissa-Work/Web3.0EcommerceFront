@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import 'react-credit-cards/es/styles-compiled.css';
-
+import MuiAlert from "@material-ui/lab/Alert";
 
 import axios from 'axios';
 import Header from '../Template/header';
@@ -16,7 +16,8 @@ export default class PayWithCreditCard extends React.Component {
     focus: '',
     name: '',
     number: '',
-    email:''
+    email:'',
+    status:''
   };
    
   
@@ -49,6 +50,7 @@ export default class PayWithCreditCard extends React.Component {
    }
    axios.post('/payment/confirm_credit_card_payment',credit_card,{headers:headers}).then((res)=>{
     console.log(res)
+    
    })
 
   }

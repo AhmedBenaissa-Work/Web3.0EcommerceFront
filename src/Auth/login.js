@@ -4,6 +4,11 @@ import {useNavigate} from "react-router-dom"
 import Header from "../Template/header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import MuiAlert from "@material-ui/lab/Alert";
+function Alert(props) {
+  return <MuiAlert elevation={6}
+      variant="filled" {...props} />;
+}
 export default function Login(){
 
     const navigate = useNavigate();

@@ -18,6 +18,7 @@ import ProductDetails from './components/ProductDetails';
 import PayWithCreditCard from './components/PayWithCreditCard';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Transactions from './components/transactions';
 
 function App() {
  
@@ -39,7 +40,7 @@ function App() {
     <Route exact path="/order/:id" element={< PlaceOrder/>} />
     <Route exact path="/orders" element={< View_Orders/>} />
     <Route exact path="/product/:id" element={< ProductDetails/>} />
-    
+    <Route exact path="/payments" element={< Transactions/>} />
     <Route exact path="/card/:amount"
           element={<PayWithCreditCard/>}
         />

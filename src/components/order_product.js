@@ -17,6 +17,7 @@ export default function PlaceOrder(props){
     console.log(id)
     const [email,setemail]=useState("")
     const [address,setaddress]=useState("")
+    const [quantity,setquantity]=useState(0)
     const [modalShow, setModalShow] = useState(false);
 
   const handleShow = () => setModalShow(true);
@@ -25,7 +26,9 @@ export default function PlaceOrder(props){
     const handleChange = event => {
         setaddress({address:event.target.value})
       }
-    
+      const handleChange2 = event => {
+        setquantity({quantity:event.target.value})
+      }
     const onOrder = event => {
 
         event.preventDefault()
@@ -38,11 +41,12 @@ export default function PlaceOrder(props){
         }
         const BodyParams={
             'product_id':id,
-            'shipment_address':address.address
+            'shipment_address':address.address,
+            'quantity':quantity.quantity
         }
         axios.post('/orders/place_order',BodyParams,{headers:headers}).then((res)=>{
             console.log(res)
-            axios.post('/products/decrease/'+id,{},{headers:headers}).then((res)=>{
+            axios.post('/products/decrease/'+id,{quantity:quantity.quantity},{headers:headers}).then((res)=>{
               console.log(res)
             })
         })
@@ -126,17 +130,20 @@ return (
         <form className="center">
           <h2 className="display-7 text-dark text-uppercase">Choose Shipment Address</h2>
           <label for="email">Address</label>
-          <input className="form-control btn-rounded-none" type="address" name="Address" placeholder="Your  address here" onChange={handleChange} /><br></br></form>
+          <input className="form-control btn-rounded-none" type="address" name="Address" placeholder="Your  address here" onChange={handleChange} /><br></br>
+          <span>+</span> Add to Cart
+          <input className="form-control btn-rounded-none" type="number" name="Quantity" placeholder="Select Number of products to order" onChange={handleChange2} /><br></br>
+          </form>
         <div className="box">
       <h1>Choose Payment Method</h1>
               <p>Choose metamask Account</p>
               <MetaMaskAccounts value={Products[0].price}></MetaMaskAccounts>
                     <p>Choose Paypal</p>
-                    <Paypal value={Products[0].price}></Paypal>
+                    <Paypal value={Products[0].price} product_id={id} quantity={quantity}></Paypal>
                     <p>Choose Credit Card</p>
-                    <Link to={`/card/${Products[0].price}`}><FontAwesomeIcon icon={faCcVisa} size="4x" style={{ marginRight: '10px' }} /></Link>
+                    <Link to={`/card/${Products[0].price*quantity.quantity}`}><FontAwesomeIcon icon={faCcVisa} size="4x" style={{ marginRight: '10px' }} /></Link>
                     <p>Pay with metamask wallet</p>
-                    <Crypto value={Products[0].price}></Crypto> </div>
+                    <Crypto value={Products[0].price} quantity={quantity} product_id={id} ></Crypto> </div>
                     
        
       

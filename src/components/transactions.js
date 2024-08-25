@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode' 
 import Header from "../Template/header";
-export default function View_Orders(){
+export default function Transactions(){
     const [Orders,setOrders]=useState([])
    useEffect(()=>{
 
@@ -13,7 +13,7 @@ export default function View_Orders(){
         const headers = {
           "authorization":token
         }
-        axios.post("/orders/view_orders",{},{headers:headers}).then((res)=>{
+        axios.post("/payment/transactions",{},{headers:headers}).then((res)=>{
                setOrders(res.data)
         })
     })
@@ -37,8 +37,9 @@ export default function View_Orders(){
               <tr>
                 
                 <th>product_id</th>
-                <th>Order Date</th>
-                <th>Shipment Address</th>
+                <th>Payment Date</th>
+                <th>amount</th>
+                <th>payment method</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +47,8 @@ export default function View_Orders(){
                 <tr key={index}>
                   <td><a href={"/product/"+item.product_id}>view Product Details</a></td>
                   <td>{item.timestamp}</td>
-                  <td>{item.shipment_address}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.payment_method}</td>
                 </tr>
               ))}
             </tbody>

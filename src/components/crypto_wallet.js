@@ -2,9 +2,9 @@
 import web3 from "web3";
 
 import { useEffect, useState } from "react";
-
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-export default function Crypto(props)
+export default function Crypto(props,product_id,quantity)
 {
 
   const [coins,setcoins]=useState([])
@@ -54,7 +54,7 @@ export default function Crypto(props)
       const [wallet_balance,setWallet_Balance]=useState(0)
       const onBuy=event=>{
         event.preventDefault()
-        const price=String((props.value/(parseFloat(eth_price)*1000) )) 
+        const price=String((props.value*props.quantity.quantity)/(parseFloat(eth_price)*1000) ) 
         const transactionParameters = {
             
             gasPrice: '10', // customizable by user during MetaMask confirmation.
@@ -76,6 +76,20 @@ export default function Crypto(props)
           params:[window.ethereum.selectedAddress]          
         })
         console.log(balance.then((res)=>{console.log(parseInt(web3.utils.toHex(res)).toString().substring(0,4))}))
+        const token = localStorage.token;
+        const user = jwtDecode(token)
+        console.log(user)
+       
+        const headers = {
+          "authorization":token
+        }
+        const payment_details={
+          product_id:props.product_id,
+          amount:parseFloat(props.value)*parseInt(props.quantity.quantity),
+          method:'crypto'                
+      }
+      axios.post('/payment/save',payment_details,{headers:headers}).then((res)=>{
+          console.log(res)})
         //axios.put('/payment/send/'+user+'/'+parseInt(parseInt(web3.utils.toWei("1","ether")).toString())+'/'+transactionParameters.to)
       }
       const connectWallet = async () => {

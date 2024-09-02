@@ -8,7 +8,8 @@ const MetaMaskAccounts = (props) => {
   const [accounts, setAccounts] = useState([]);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [eth_to_usd,seteth_to_usd]=useState("")
+  const [eth_price,seteth_price]=useState("")
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -36,6 +37,23 @@ const MetaMaskAccounts = (props) => {
   } 
   useEffect(() => {
     const loadAccounts = async () => {
+      axios.get("/exchange/").then((res)=>{
+
+        console.log(res)
+        setcoins(res.data)
+       // setUser(res.data)
+    })
+    axios.get("/exchange/ETH_to_USD").then((res)=>{
+  
+      console.log(res)
+      
+      seteth_to_usd((res.data))
+     // setUser(res.data)
+     console.log((res.data))
+     console.log(eth_to_usd)
+     seteth_price(eth_to_usd.replace(",", ".").substring(1, 6)+eth_to_usd.replace(",", ".").substring(7,9))
+     console.log(eth_price)
+  },[eth_to_usd])
       try {
         // Check if MetaMask is installed
         if (window.ethereum) {

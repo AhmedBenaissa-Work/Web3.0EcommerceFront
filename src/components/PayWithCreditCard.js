@@ -51,6 +51,7 @@ export default class PayWithCreditCard extends React.Component {
    axios.post('/payment/confirm_credit_card_payment',credit_card,{headers:headers}).then((res)=>{
     console.log(res)
     
+    
    })
 
   }

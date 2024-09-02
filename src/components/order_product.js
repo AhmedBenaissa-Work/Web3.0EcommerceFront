@@ -3,13 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Header from "../Template/header";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode' 
-import MetaMaskAccounts from "./list_metamask_accounts";
-import Crypto from "./crypto_wallet";
-import Paypal from "./paypal";
-import PaymentMethodsModal from "./ModalPayment";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCcVisa, faCcMastercard, faCcAmex, faCcDiscover, faCcPaypal } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+
+
 export default function PlaceOrder(props){
     const [User,setUser]=useState()
     const [Products,setProducts]=useState([])
@@ -19,7 +14,7 @@ export default function PlaceOrder(props){
     const [address,setaddress]=useState("")
     const [quantity,setquantity]=useState(0)
     const [modalShow, setModalShow] = useState(false);
-
+  const navigate = useNavigate()
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
     
@@ -42,12 +37,14 @@ export default function PlaceOrder(props){
         const BodyParams={
             'product_id':id,
             'shipment_address':address.address,
-            'quantity':quantity.quantity
+            'quantity':quantity.quantity,
+            "status":'pending'
         }
         axios.post('/orders/place_order',BodyParams,{headers:headers}).then((res)=>{
             console.log(res)
             axios.post('/products/decrease/'+id,{quantity:quantity.quantity},{headers:headers}).then((res)=>{
               console.log(res)
+              navigate('/orders')
             })
         })
     }
@@ -134,16 +131,7 @@ return (
           <span>+</span> Add to Cart
           <input className="form-control btn-rounded-none" type="number" name="Quantity" placeholder="Select Number of products to order" onChange={handleChange2} /><br></br>
           </form>
-        <div className="box">
-      <h1>Choose Payment Method</h1>
-              <p>Choose metamask Account</p>
-              <MetaMaskAccounts value={Products[0].price}></MetaMaskAccounts>
-                    <p>Choose Paypal</p>
-                    <Paypal value={Products[0].price} product_id={id} quantity={quantity}></Paypal>
-                    <p>Choose Credit Card</p>
-                    <Link to={`/card/${Products[0].price*quantity.quantity}`}><FontAwesomeIcon icon={faCcVisa} size="4x" style={{ marginRight: '10px' }} /></Link>
-                    <p>Pay with metamask wallet</p>
-                    <Crypto value={Products[0].price} quantity={quantity} product_id={id} ></Crypto> </div>
+        
                     
        
       

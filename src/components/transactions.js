@@ -26,7 +26,7 @@ export default function Transactions(){
        <div className="container">
         <div className="row">
           <div className="display-header d-flex justify-content-between pb-3">
-            <h2 className="display-7 text-dark text-uppercase">Your Orders</h2>
+            <h2 className="display-7 text-dark text-uppercase">Your Payment Transactions</h2>
             <div className="btn-right">
               <a href="/welcome" className="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
               <a href="/payments" className="btn btn-medium btn-normal text-uppercase">See your Payment transactions</a>

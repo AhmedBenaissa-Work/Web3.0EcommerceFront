@@ -9,6 +9,7 @@ export default function Paypal(props,product_id,quantity){
         console.log(props)
         console.log(props.product_id)
         console.log(props.quantity)
+        
     }
 const CreatePaypalPayment = event =>{
     console.log(props,product_id,quantity)
@@ -50,7 +51,7 @@ const response2 = await axios.post(
                     "price": parseFloat(price),
                    
                     "currency": "USD",
-                    "quantity":2
+                    "quantity":props.quantity.quantity
                 }]
             },
             "payee":{"email":"user13@gmail.com"},

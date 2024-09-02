@@ -18,13 +18,18 @@ const MetaMaskAccounts = (props) => {
   };
   const  OnBuy = (account) =>{
   console.log(account)
+  const token = localStorage.token;
+   
+  const headers = {
+    "authorization":token
+  }
   const params={
     "sender":account,
     "receiver":"0x20d113611E7157611E1a4AeFA76c4d4370C9F3bC",
     "amount":props.value/3345.66 //for now but until then integrate a web service that can convert usd to eth
   }
 
-   axios.post('/payment/crypto_transaction',params).then((res)=>{
+   axios.post('/payment/crypto_transaction',params,{headers:headers}).then((res)=>{
     console.log(res)
    })
 

@@ -30,7 +30,7 @@ export default function PlaceOrder(props){
         const token = localStorage.token;
         const user = jwtDecode(token)
         console.log(user)
-       
+        setUser(user)
         const headers = {
           "authorization":token
         }
